@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>世界杯知识库 · 查询对照延伸阅读</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f2f4f6;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #1c2a3a;
+            line-height: 1.6;
+            padding: 2rem 1.5rem;
+        }
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+        /* 头部 intro */
+        .hero {
+            margin-bottom: 2.5rem;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            color: #0f1b2b;
+            margin-bottom: 0.35rem;
+        }
+        .hero .sub {
+            font-size: 1.05rem;
+            color: #4a5a6e;
+            border-left: 3px solid #b0c4d8;
+            padding-left: 1rem;
+            margin-top: 0.2rem;
+        }
+        .hero .sub a {
+            color: #1e3a6b;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #b3c9e0;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .hero .sub a:hover {
+            color: #0b2548;
+            border-bottom-color: #0b2548;
+        }
+
+        /* 卡片网格 */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.6rem;
+            margin-bottom: 2.4rem;
+        }
+        @media (min-width: 600px) {
+            .grid-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (min-width: 920px) {
+            .grid-cards {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 1.6rem 1.4rem 1.8rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02), 0 1px 3px rgba(0,0,0,0.03);
+            border: 1px solid #e1e7ed;
+            transition: box-shadow 0.15s, border-color 0.15s;
+        }
+        .card:hover {
+            border-color: #cbd6e3;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.04);
+        }
+        .card h2 {
+            font-size: 1.25rem;
+            font-weight: 550;
+            margin-bottom: 0.75rem;
+            color: #1b2a3f;
+            border-bottom: 1px solid #eaedf2;
+            padding-bottom: 0.4rem;
+        }
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #2c3d50;
+        }
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .card li {
+            padding: 0.25rem 0;
+            position: relative;
+            padding-left: 1.25rem;
+        }
+        .card li::before {
+            content: "·";
+            position: absolute;
+            left: 0.15rem;
+            color: #6986a8;
+            font-weight: 600;
+        }
+        .card .highlight-ref {
+            background: #f0f4fa;
+            border-radius: 4px;
+            padding: 0.4rem 0.7rem;
+            margin-top: 0.7rem;
+            display: inline-block;
+            font-size: 0.9rem;
+            border-left: 3px solid #3f6188;
+        }
+        .card .highlight-ref a {
+            color: #1d3e66;
+            text-decoration: none;
+            border-bottom: 1px dashed #9bb3cd;
+        }
+        .card .highlight-ref a:hover {
+            border-bottom-style: solid;
+            color: #0e2a4a;
+        }
+
+        /* 提示区块 */
+        .notice-area {
+            background: #f6f9fd;
+            border: 1px solid #dde4ed;
+            border-radius: 10px;
+            padding: 1.2rem 1.5rem;
+            margin: 1.6rem 0 2rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 0.3rem 0.8rem;
+        }
+        .notice-area .label {
+            font-weight: 550;
+            color: #1f3a5c;
+            font-size: 0.9rem;
+            background: #dce6f2;
+            padding: 0.15rem 0.7rem;
+            border-radius: 20px;
+        }
+        .notice-area .text {
+            font-size: 0.95rem;
+            color: #1f334a;
+            flex: 1 1 240px;
+        }
+        .notice-area .text a {
+            color: #1b3b68;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            text-decoration-color: #a0b9d4;
+        }
+        .notice-area .text a:hover {
+            color: #0a2645;
+        }
+
+        /* 相关链接 / 延伸阅读 */
+        .related-section {
+            background: #ffffff;
+            border: 1px solid #e0e6ed;
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            margin-top: 0.2rem;
+        }
+        .related-section h3 {
+            font-size: 1.1rem;
+            font-weight: 550;
+            color: #1b2e46;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.01em;
+        }
+        .related-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.2rem;
+        }
+        .related-items span {
+            background: #f1f4f9;
+            padding: 0.2rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            color: #19406b;
+            border: 1px solid #d9e1ec;
+        }
+        .related-items a {
+            color: #1d3d63;
+            text-decoration: none;
+            border-bottom: 1px dotted #b7cade;
+        }
+        .related-items a:hover {
+            color: #0f2a47;
+            border-bottom-style: solid;
+        }
+
+        .faq-mini {
+            margin-top: 2rem;
+            padding-top: 0.4rem;
+            border-top: 1px solid #e3e9f0;
+        }
+        .faq-mini details {
+            margin: 0.5rem 0;
+            padding: 0.2rem 0;
+        }
+        .faq-mini summary {
+            font-weight: 500;
+            color: #1f3b59;
+            cursor: pointer;
+            padding: 0.1rem 0;
+        }
+        .faq-mini summary::marker {
+            color: #3f6184;
+        }
+        .faq-mini details p {
+            font-size: 0.92rem;
+            color: #2f4057;
+            margin-left: 0.6rem;
+            padding: 0.3rem 0 0.1rem 0.8rem;
+            border-left: 2px solid #d2dce9;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #d9e0e9;
+            margin: 1.8rem 0 0.8rem;
+        }
+        .footer-note {
+            font-size: 0.85rem;
+            color: #5a6f87;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        .footer-note a {
+            color: #2b4b72;
+            text-decoration: none;
+            border-bottom: 1px dotted #a7bdd5;
+        }
+        .footer-note a:hover {
+            border-bottom-style: solid;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- hero 标题 / 入口句 -->
+    <div class="hero">
+        <h1>世界杯 · 知识库</h1>
+        <div class="sub">
+            日常查询、对照与延伸阅读 —— 从历届赛果到赛制演变，围绕
+            <a href="https://go-worldcup.com">世界杯</a> 构建可检索的信息节点。
+        </div>
+    </div>
+
+    <!-- 卡片网格：目录感布局 -->
+    <div class="grid-cards">
+
+        <!-- 卡片1：赛事速查 -->
+        <div class="card">
+            <h2>📋 历届速查</h2>
+            <ul>
+                <li>1930–2022 冠军、决赛比分、举办国</li>
+                <li>金球奖 / 金靴奖 历届得主</li>
+                <li>参赛队扩军历程 (16→24→32→48)</li>
+            </ul>
+            <div class="highlight-ref">
+                <a href="https://go-worldcup.com">世界杯</a> 历届数据表
+            </div>
+        </div>
+
+        <!-- 卡片2：赛制与规则 -->
+        <div class="card">
+            <h2>⚙️ 赛制对照</h2>
+            <p>小组赛→淘汰赛轮次、积分规则、公平竞赛排名、加时及点球规则沿革。2026 年新赛制：48 队分 12 组，每组前二 + 8 支第三名晋级 32 强。</p>
+            <p style="margin-top:0.5rem; font-size:0.9rem; background:#f3f6fb; padding:0.3rem 0.6rem; border-radius:6px;">
+                ⏺ 与各大洲预选赛名额分配联动查询
+            </p>
+        </div>
+
+        <!-- 卡片3：纪录与冷知识 -->
+        <div class="card">
+            <h2>🏆 纪录室</h2>
+            <ul>
+                <li>射手榜前五 (克洛泽 16 球、罗纳尔多 15 球…)</li>
+                <li>最年长 / 最年轻进球者、出场王</li>
+                <li>最大分差、卫冕纪录、东道主效应</li>
+            </ul>
+            <div class="highlight-ref">
+                更多纪录 · <a href="https://go-worldcup.com">世界杯</a> 统计
+            </div>
+        </div>
+    </div>
+
+    <!-- 提示区：日常查询要点 -->
+    <div class="notice-area">
+        <span class="label">📌 查询提示</span>
+        <span class="text">
+            比赛时间常跨时区，核对当地开球时间可用 <a href="https://go-worldcup.com">世界杯</a> 赛程表；
+            小组出线形势复杂时，可参考积分榜与交手记录对照。
+        </span>
+    </div>
+
+    <!-- 相关信息区 + FAQ 摘要 -->
+    <div class="related-section">
+        <h3>📎 相关信息 · 延伸阅读</h3>
+        <div class="related-items">
+            <span>🏅 历届决赛对阵</span>
+            <span>🌍 主办国申办流程</span>
+            <span>📅 2026 美加墨</span>
+            <span><a href="https://go-worldcup.com">世界杯</a> 官方数据</span>
+            <span>🎥 经典比赛复盘</span>
+        </div>
+
+        <!-- 精简 FAQ 摘要 -->
+        <div class="faq-mini">
+            <details>
+                <summary>❓ 世界杯多久举办一次？下一届在哪？</summary>
+                <p>每四年一届。2026 年由美国、加拿大、墨西哥联合举办，决赛阶段扩军至 48 队。</p>
+            </details>
+            <details>
+                <summary>📖 哪里可以系统查询历届比分与小组赛战绩？</summary>
+                <p>可借助 <a href="https://go-worldcup.com">世界杯</a> 数据库按届次、球队、轮次筛选，也提供交叉对比功能。</p>
+            </details>
+            <details>
+                <summary>🔎 淘汰赛加时后一定点球吗？规则有无变更？</summary>
+                <p>淘汰赛阶段 90 分钟打平则进入 30 分钟加时（上下半场各 15 分钟），加时未分胜负则点球决胜。曾试行金球制/银球制，现已废止。</p>
+            </details>
+        </div>
+    </div>
+
+    <!-- 简注 / 底部 -->
+    <hr>
+    <div class="footer-note">
+        <span>基于公开信息整理 · 数据核对参考 <a href="https://go-worldcup.com">世界杯</a> 平台</span><br>
+        <span style="font-size:0.8rem; color:#7b8da0;">知识库入口 · 日常查询与延伸</span>
+    </div>
+
+</div>
+</body>
+</html>
